@@ -2,26 +2,20 @@ import sys
 import argparse
 import configparser
 
-import csv
-
-from io import StringIO
-
 import requests
 from requests.auth import HTTPBasicAuth
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import graphyte
-
-from datetime import timedelta
 
 from .exc import DataCollectionError
 from .settings import YARN_ACTIVE_RES_MANAGERS
 
 
-def batchify(iterable, n=1):
-    l = len(iterable)
-    for ndx in range(0, l, n):
-        yield iterable[ndx:min(ndx + n, l)]
+def batchify(iterable, batch_length=1):
+    length = len(iterable)
+    for index in range(0, length, batch_length):
+        yield iterable[index:min(index + batch_length, length)]
 
 
 class Ambari2Graphite:

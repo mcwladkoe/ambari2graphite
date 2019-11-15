@@ -110,7 +110,12 @@ NODENAMES_METRICS = [
     'rpcdetailed.rpcdetailed.healthcheck.AddBlockNumOps',
 ]
 
-YARN_ACTIVE_RES_MANAGERS = [
+
+# https://mail-archives.apache.org/mod_mbox/ambari-commits/201502.mbox/%3Cf74df71ca2df4ca8ac8ca7665c74a903@git.apache.org%3E
+# https://github.com/prajwalrao/ambari-metrics-grafana/blob/master/dashboards/grafana-yarn-applications.json
+# https://community.cloudera.com/t5/Support-Questions/ambari-server-Hang-up/td-p/175503
+# https://github.com/swagle/sidmisc/blob/master/scripts/Readme.md
+YARN_ACTIVE_RES_MANAGERS = {
     'metricssystem.MetricsSystem.DroppedPubAll',
     'metricssystem.MetricsSystem.NumActiveSinks',
     'metricssystem.MetricsSystem.NumActiveSources',
@@ -124,20 +129,25 @@ YARN_ACTIVE_RES_MANAGERS = [
     'metricssystem.MetricsSystem.Sink_timelineQsize',
     'metricssystem.MetricsSystem.SnapshotAvgTime',
     'metricssystem.MetricsSystem.SnapshotNumOps',
-    'pkts_in',
-    'pkts_out',
-    'proc_run',
-    'proc_total',
+
+    'pkts_in': 'metrics/network/pkts_in',
+    'pkts_out': 'metrics/network/pkts_out',
+    'proc_run': 'metrics/process/proc_run',
+    'proc_total': 'metrics/process/proc_total',
     'rpc.rpc.CallQueueLength',
-    'yarn.ClusterMetrics.AMLaunchDelayAvgTime',
-    'yarn.ClusterMetrics.AMLaunchDelayNumOps',
-    'yarn.ClusterMetrics.AMRegisterDelayAvgTime',
-    'yarn.ClusterMetrics.AMRegisterDelayNumOps',
-    'yarn.ClusterMetrics.NumActiveNMs',
-    'yarn.ClusterMetrics.NumDecommissionedNMs',
-    'yarn.ClusterMetrics.NumLostNMs',
-    'yarn.ClusterMetrics.NumRebootedNMs',
-    'yarn.ClusterMetrics.NumUnhealthyNMs',
+
+    # ???
+    'yarn.ClusterMetrics.AMLaunchDelayAvgTime': 'yarn.ClusterMetrics.AMLaunchDelayAvgTime',
+    'yarn.ClusterMetrics.AMLaunchDelayNumOps': 'yarn.ClusterMetrics.AMLaunchDelayNumOps',
+    'yarn.ClusterMetrics.AMRegisterDelayAvgTime': 'yarn.ClusterMetrics.AMRegisterDelayAvgTime',
+    'yarn.ClusterMetrics.AMRegisterDelayNumOps': 'yarn.ClusterMetrics.AMRegisterDelayNumOps',
+
+
+    'yarn.ClusterMetrics.NumActiveNMs': 'metrics/yarn/ClusterMetrics/NumActiveNMs',
+    'yarn.ClusterMetrics.NumDecommissionedNMs': 'metrics/yarn/ClusterMetrics/NumDecommissionedNMs',
+    'yarn.ClusterMetrics.NumLostNMs': 'metrics/yarn/ClusterMetrics/NumLostNMs',
+    'yarn.ClusterMetrics.NumRebootedNMs': 'metrics/yarn/ClusterMetrics/NumRebootedNMs',
+    'yarn.ClusterMetrics.NumUnhealthyNMs': 'metrics/yarn/ClusterMetrics/NumUnhealthyNMs',
     'yarn.QueueMetrics.Queue=root.AMResourceLimitMB',
     'yarn.QueueMetrics.Queue=root.AMResourceLimitVCores',
     'yarn.QueueMetrics.Queue=root.ActiveApplications',
@@ -231,26 +241,28 @@ YARN_ACTIVE_RES_MANAGERS = [
     'yarn.QueueMetrics.Queue=root.thriftsvr.running_1440',
     'yarn.QueueMetrics.Queue=root.thriftsvr.running_300',
     'yarn.QueueMetrics.Queue=root.thriftsvr.running_60',
-]
+}
 
 # 'HDFS/component/DATANODE'
-YARN_ACTIVE_RES_MANAGERS = [
-    'load_fifteen',
-    'load_five',
-    'yarn.NodeManagerMetrics.AllocatedGB',
-    'yarn.NodeManagerMetrics.AllocatedVCores',
-    'yarn.NodeManagerMetrics.AvailableGB',
-    'yarn.NodeManagerMetrics.AvailableVCores',
-    'yarn.NodeManagerMetrics.BadLocalDirs',
-    'yarn.NodeManagerMetrics.BadLogDirs',
-    'yarn.NodeManagerMetrics.ContainerLaunchDurationAvgTime',
-    'yarn.NodeManagerMetrics.ContainerLaunchDurationNumOps',
-    'yarn.NodeManagerMetrics.ContainersCompleted',
-    'yarn.NodeManagerMetrics.ContainersFailed',
-    'yarn.NodeManagerMetrics.ContainersIniting',
-    'yarn.NodeManagerMetrics.ContainersKilled',
-    'yarn.NodeManagerMetrics.ContainersLaunched',
-    'yarn.NodeManagerMetrics.ContainersRunning',
-    'yarn.NodeManagerMetrics.GoodLocalDirsDiskUtilizationPerc',
-    'yarn.NodeManagerMetrics.GoodLogDirsDiskUtilizationPerc',
-]
+# https://www.mail-archive.com/commits@ambari.apache.org/msg31983.html
+# http://mail-archives.apache.org/mod_mbox/ambari-commits/201506.mbox/%3Cfa7a4ae23d3749d1b7d90a5c83157931@git.apache.org%3E
+YARN_ACTIVE_RES_MANAGERS = {
+    'load_fifteen': 'metrics/load/load_fifteen',
+    'load_five': 'metrics/load/load_five',
+    'yarn.NodeManagerMetrics.AllocatedGB': 'metrics/yarn/AllocatedGB',
+    'yarn.NodeManagerMetrics.AllocatedVCores': 'metrics/yarn/AllocatedVCores',
+    'yarn.NodeManagerMetrics.AvailableGB': 'metrics/yarn/AvailableGB',
+    'yarn.NodeManagerMetrics.AvailableVCores': 'metrics/yarn/AvailableVCores',
+    'yarn.NodeManagerMetrics.BadLocalDirs': 'metrics/yarn/BadLocalDirs',
+    'yarn.NodeManagerMetrics.BadLogDirs': 'metrics/yarn/BadLogDirs',
+    'yarn.NodeManagerMetrics.ContainerLaunchDurationAvgTime': 'metrics/yarn/ContainerLaunchDurationAvgTime',
+    'yarn.NodeManagerMetrics.ContainerLaunchDurationNumOps': 'metrics/yarn/ContainerLaunchDurationNumOps',
+    'yarn.NodeManagerMetrics.ContainersCompleted': 'metrics/yarn/ContainersCompleted',
+    'yarn.NodeManagerMetrics.ContainersFailed': 'metrics/yarn/ContainersFailed',
+    'yarn.NodeManagerMetrics.ContainersIniting': 'metrics/yarn/ContainersIniting',
+    'yarn.NodeManagerMetrics.ContainersKilled': 'metrics/yarn/ContainersKilled',
+    'yarn.NodeManagerMetrics.ContainersLaunched': 'metrics/yarn/ContainersLaunched',
+    'yarn.NodeManagerMetrics.ContainersRunning': 'metrics/yarn/ContainersRunning',
+    'yarn.NodeManagerMetrics.GoodLocalDirsDiskUtilizationPerc': 'metrics/yarn/GoodLocalDirsDiskUtilizationPerc',
+    'yarn.NodeManagerMetrics.GoodLogDirsDiskUtilizationPerc': 'metrics/yarn/GoodLogDirsDiskUtilizationPerc',
+}
