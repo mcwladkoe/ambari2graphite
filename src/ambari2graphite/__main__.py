@@ -169,8 +169,9 @@ class Ambari2Graphite:
                     self.test_start_timestamp and
                     timestamp < self.test_start_timestamp
                 ):
-                    print(metric_path)
-                    graphyte.send(metric_path, value, timestamp)
+                    delta = timestamp - self.test_start_timestamp
+                    relative_timestamp = BASE_TIMESTAMP_TO_UPLOAD + delta
+                    graphyte.send(metric_path, value, relative_timestamp)
 
 
 def main(argv=sys.argv):
